@@ -1,0 +1,44 @@
+# Maven
+target/
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.classpath
+.project
+.settings/
+
+# Build
+bin/
+build/
+out/
+dist/
+
+# Logs
+*.log
+logs/
+
+# Environment
+.env
+*.env
+
+# Quarkus
+quarkus-app/
+quarkus-generated-*
+src/main/resources/META-INF/resources/index.html
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp files
+*.tmp
+*.bak
+*.swp
+*~
