@@ -21,10 +21,18 @@
 Generated application comes with sample test process that allows you to verify if the application is working as expected. Simply execute following command to try it out
 
 ```sh
-curl -d '{}' -H "Content-Type: application/json" -X POST http://localhost:8080/greetings
+curl -X 'POST' \
+  'http://localhost:8080/debit-card-claim' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "Claim": {
+    "claimTimely": true,
+    "highRiskTransaction": false
+  }
+}'
 ```
 
-Once successfully invoked you should see "Hello World" in the console of the running application.
 
 The generated application provides out of the box multiple samples of Kogito assets; you can reference the generated Swagger documentation and JUnit tests.
 
