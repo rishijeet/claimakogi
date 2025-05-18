@@ -1,92 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dmn:definitions xmlns:dmn="http://www.omg.org/spec/DMN/20180521/MODEL/" xmlns="http://example.com" xmlns:dmndi="http://www.omg.org/spec/DMN/20180521/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:feel="http://www.omg.org/spec/DMN/20180521/FEEL/" xmlns:kie="http://www.drools.org/kie/dmn/1.2" id="definitions" name="debit-card-claim" typeLanguage="http://www.omg.org/spec/DMN/20180521/FEEL/" namespace="http://example.com">
   <dmn:extensionElements/>
-  <dmn:itemDefinition id="tClaim" name="tClaim" isCollection="false">
-    <dmn:itemComponent id="_FD9BFD1B-C9C2-453F-A6F5-8AD9FA3B6851" name="claimTimely" isCollection="false"/>
-    <dmn:itemComponent id="_2D596090-4012-44CC-A09A-49ECF610093D" name="highRiskTransaction" isCollection="false"/>
-  </dmn:itemDefinition>
-  <dmn:decision id="claimApproval" name="Claim Approval Decision">
+  <dmn:inputData id="_3D92E74F-6A1A-45A9-B39D-45A357662B55" name="ClaimType">
     <dmn:extensionElements/>
-    <dmn:variable id="_415BC49D-0D57-40A7-B6A0-00D0C53DF5E9" name="Claim Approval Decision" typeRef="string"/>
-    <dmn:decisionTable id="_5C34BEEE-A69F-4246-9F7D-693578BE232B" hitPolicy="UNIQUE" preferredOrientation="Rule-as-Row">
-      <dmn:input id="input1">
-        <dmn:inputExpression id="_9BA83440-0D58-4919-B848-D264809CC2E3" typeRef="boolean">
-          <dmn:text>Claim.claimTimely</dmn:text>
-        </dmn:inputExpression>
-      </dmn:input>
-      <dmn:input id="input2">
-        <dmn:inputExpression id="_0877081B-4C6C-4582-846F-4B36A268B19B" typeRef="boolean">
-          <dmn:text>Claim.highRiskTransaction</dmn:text>
-        </dmn:inputExpression>
-      </dmn:input>
-      <dmn:output id="output1"/>
-      <dmn:annotation name=""/>
-      <dmn:rule id="rule1">
-        <dmn:inputEntry id="inputEntry1">
-          <dmn:text>true</dmn:text>
-        </dmn:inputEntry>
-        <dmn:inputEntry id="inputEntry2">
-          <dmn:text>false</dmn:text>
-        </dmn:inputEntry>
-        <dmn:outputEntry id="outputEntry1">
-          <dmn:text>"APPROVED"</dmn:text>
-        </dmn:outputEntry>
-        <dmn:annotationEntry>
-          <dmn:text/>
-        </dmn:annotationEntry>
-      </dmn:rule>
-      <dmn:rule id="rule2">
-        <dmn:inputEntry id="inputEntry3">
-          <dmn:text>false</dmn:text>
-        </dmn:inputEntry>
-        <dmn:inputEntry id="inputEntry4">
-          <dmn:text>-</dmn:text>
-        </dmn:inputEntry>
-        <dmn:outputEntry id="outputEntry2">
-          <dmn:text>"REJECTED: Late Claim"</dmn:text>
-        </dmn:outputEntry>
-        <dmn:annotationEntry>
-          <dmn:text/>
-        </dmn:annotationEntry>
-      </dmn:rule>
-      <dmn:rule id="rule3">
-        <dmn:inputEntry id="inputEntry5">
-          <dmn:text>true</dmn:text>
-        </dmn:inputEntry>
-        <dmn:inputEntry id="inputEntry6">
-          <dmn:text>true</dmn:text>
-        </dmn:inputEntry>
-        <dmn:outputEntry id="outputEntry3">
-          <dmn:text>"REJECTED: High Fraud Risk"</dmn:text>
-        </dmn:outputEntry>
-        <dmn:annotationEntry>
-          <dmn:text/>
-        </dmn:annotationEntry>
-      </dmn:rule>
-    </dmn:decisionTable>
+    <dmn:variable id="_40D478FF-7C19-432A-8202-8F753B9BEFF8" name="ClaimType" typeRef="string"/>
+  </dmn:inputData>
+  <dmn:decision id="_8323CBBA-7E50-4C95-A9D7-0D3C7FBEB39A" name="ClaimStatus">
+    <dmn:extensionElements/>
+    <dmn:variable id="_426907E8-6B24-4CC1-8B44-ACC2087B15B3" name="ClaimStatus" typeRef="string"/>
+    <dmn:informationRequirement id="_B02218B4-01CD-4BA9-8856-9A8D78C4F049">
+      <dmn:requiredInput href="#_3D92E74F-6A1A-45A9-B39D-45A357662B55"/>
+    </dmn:informationRequirement>
+    <dmn:list id="_69AF08BB-9813-4CD1-BF0A-461F389978D8">
+      <dmn:literalExpression id="_916016C7-4EFF-4BF8-A081-2F66FCBFB701">
+        <dmn:text/>
+      </dmn:literalExpression>
+    </dmn:list>
   </dmn:decision>
+  <dmn:inputData id="_C8C0021F-642C-4165-92F0-5BC0B43D08B7" name="Transaction">
+    <dmn:extensionElements/>
+    <dmn:variable id="_AD4A10C8-0C71-4EE5-8415-57EA3A52928D" name="Transaction" typeRef="number"/>
+  </dmn:inputData>
   <dmndi:DMNDI>
     <dmndi:DMNDiagram id="_5CA091F8-14FD-45F2-B01E-1ACAC6C8CC15" name="DRG">
       <di:extension>
         <kie:ComponentsWidthsExtension>
-          <kie:ComponentWidths dmnElementRef="_5C34BEEE-A69F-4246-9F7D-693578BE232B">
+          <kie:ComponentWidths dmnElementRef="_69AF08BB-9813-4CD1-BF0A-461F389978D8">
             <kie:width>50</kie:width>
-            <kie:width>100</kie:width>
-            <kie:width>100</kie:width>
-            <kie:width>100</kie:width>
-            <kie:width>100</kie:width>
+            <kie:width>200</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_916016C7-4EFF-4BF8-A081-2F66FCBFB701">
+            <kie:width>200</kie:width>
           </kie:ComponentWidths>
         </kie:ComponentsWidthsExtension>
       </di:extension>
-      <dmndi:DMNShape id="dmnshape-drg-claimApproval" dmnElementRef="claimApproval" isCollapsed="false">
+      <dmndi:DMNShape id="dmnshape-drg-_3D92E74F-6A1A-45A9-B39D-45A357662B55" dmnElementRef="_3D92E74F-6A1A-45A9-B39D-45A357662B55" isCollapsed="false">
         <dmndi:DMNStyle>
           <dmndi:FillColor red="255" green="255" blue="255"/>
           <dmndi:StrokeColor red="0" green="0" blue="0"/>
           <dmndi:FontColor red="0" green="0" blue="0"/>
         </dmndi:DMNStyle>
-        <dc:Bounds x="50" y="50" width="100" height="50"/>
+        <dc:Bounds x="122" y="196" width="100" height="50"/>
         <dmndi:DMNLabel/>
       </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_8323CBBA-7E50-4C95-A9D7-0D3C7FBEB39A" dmnElementRef="_8323CBBA-7E50-4C95-A9D7-0D3C7FBEB39A" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="122" y="66" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_C8C0021F-642C-4165-92F0-5BC0B43D08B7" dmnElementRef="_C8C0021F-642C-4165-92F0-5BC0B43D08B7" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="279" y="196" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="dmnedge-drg-_B02218B4-01CD-4BA9-8856-9A8D78C4F049-AUTO-SOURCE-AUTO-TARGET" dmnElementRef="_B02218B4-01CD-4BA9-8856-9A8D78C4F049">
+        <di:waypoint x="172" y="196"/>
+        <di:waypoint x="172" y="116"/>
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+    <dmndi:DMNDiagram id="_7E739587-2CD4-47EB-97D4-37FEDD10125F" name="new-diagram">
+      <di:extension>
+        <kie:ComponentsWidthsExtension/>
+      </di:extension>
     </dmndi:DMNDiagram>
   </dmndi:DMNDI>
 </dmn:definitions>
